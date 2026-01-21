@@ -1,0 +1,60 @@
+/* ==UserStyle==
+@name         iCloud Mail - Light reading pane + readable attachments
+@namespace    local
+@version      1.2.0
+@description  White reading-pane background, fix inherited white email text, and make attachment tile text readable
+==/UserStyle== */
+/* OUTER iCloud Mail UI (attachments live here) */
+@-moz-document url-prefix("https://www.icloud.com/mail") {
+
+    /* Keep the reading pane (iframe wrapper) white */
+    .ic-21l0u5,
+    .ic-21l0u5 > iframe {
+        background: #fff !important;
+    }
+}
+
+/* MESSAGE BODY iframe document */
+@-moz-document url-prefix("https://www-mail.icloud-sandbox.com/applications/mail2-message/"),
+url-prefix("https://www-mail.icloud.com/applications/mail2-message/") {
+
+    /* Helps with system colors + default UA styling */
+    :root {
+        color-scheme: light !important;
+    }
+
+    html,
+    body,
+    .mail-message-defaults {
+        background: #fff !important;
+    }
+
+    /* Fix: unstyled email text should inherit black, not white */
+    .mail-message-defaults {
+        color: #222 !important;
+    }
+
+    /* Fix emails that use system color keywords like "windowtext" */
+    [style*="windowtext" i] {
+        color: #222 !important;
+    }
+
+    /* Attachments: only fix text + tile background (don’t nuke hover/selected styling globally) */
+    .icloud-attachment-tile,
+    .icloud-iwork-attachment-coupon {
+        border-color: #bbb;
+        border: 1px solid rgba(0, 0, 0, .25) !important;
+    }
+
+    .icloud-attachment-tile-name,
+    .icloud-attachment-tile-size {
+        color: #222 !important;
+        font-weight: 400;
+    }
+
+    /* Attachment file icon: add border + subtle shadow */
+    .icloud-attachment-tile-file-icon {
+        border-radius: 6px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .25) !important;
+    }
+}
